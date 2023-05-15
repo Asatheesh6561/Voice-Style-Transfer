@@ -10,7 +10,7 @@ A Tensorflow implementation of the Voice Style Transfer paper: Unsupervised Spee
  - pysptk
  - soundfile
  - matplotlib
- - wavenet_vocoder: '''pip install wavenet_vocoder'''
+ - wavenet_vocoder: ```pip install wavenet_vocoder```
 
 ## Training
-Download training data from the CSTR VCTK corpus to '''assets'''.
+Download training data from the CSTR VCTK corpus to ```assets```.
