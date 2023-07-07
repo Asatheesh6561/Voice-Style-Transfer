@@ -15,9 +15,7 @@ def main(config):
     physical_devices = tf.config.experimental.list_physical_devices('GPU')
     for i in physical_devices:
         tf.config.experimental.set_memory_growth(i, True)
-    # Create directories if not exist.
-    if not os.path.exists(config.log_dir):
-        os.makedirs(config.log_dir)
+    if not os.path.exists(config.log_dir): os.makedirs(config.log_dir)
     if not os.path.exists(config.model_save_dir):
         os.makedirs(config.model_save_dir)
     if not os.path.exists(config.sample_dir):
