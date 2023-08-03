@@ -4,6 +4,7 @@ import numpy as np
 from scipy import signal
 from librosa.filters import mel
 from scipy.signal import get_window
+from pymcd.mcd import Calculate_MCD
 
 def butter_highpass(cutoff, fs, order=5):
   nyq = 0.5 * fs
@@ -42,8 +43,6 @@ def quantize_f0_tf(x, num_bins=256):
     x = x + 1
     x = tf.where(uv, tf.zeros_like(x), x)
     enc = tf.one_hot(tf.cast(x, tf.int32), num_bins+1)
-    #enc = tf.zeros((x.shape[0], num_bins + 1), dtype=tf.float32)
-    #enc = tf.tensor_scatter_nd_update(enc, tf.expand_dims(tf.cast(x, tf.int32), -1), tf.ones_like(x, dtype=tf.float32))
     return enc, tf.cast(x, tf.int64)
 
 def get_mask_from_lengths(lengths, max_len):
@@ -56,3 +55,9 @@ def pad_seq_to_2(x, len_out=128):
     len_pad = len_out - sequence_length
     assert len_pad >= 0
     return tf.pad(x, [[0,0], [0,len_pad], [0,0]], 'CONSTANT'), len_pad
+
+def get_average_mcd(first_original, second_original, first_transfer, second_transfer):
+  mcd_metric = Calculate_MCD(MCD_mode="dtw")
+  first_mcd = mcd_toolbox.calculate_mcd(first_original, first_transfer)
+  second_mcd = mcd_toolbox.calculate_mcd(second_original, second_transfer)
+  return (first_mcd + second_mcd) / 2
