@@ -1,4 +1,6 @@
-# SSTF
+# SSTF: Speech Split TensorFlow
+SSTF (Speech Split TensorFlow) is a voice style transfer project built using TensorFlow. It enables the transformation of speech signals from one voice style to another while maintaining the content. This is done by learning a mapping between different speaker styles and applying it to transfer voice characteristics such as pitch, timbre, and speech rhythm.
+
 
 ## Dependencies
  - Python 3.6
